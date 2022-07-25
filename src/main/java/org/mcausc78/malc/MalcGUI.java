@@ -10,12 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MalcGUI {
+    public static void setTheme(String[] args) {
+        try {
+            UIManager.setLookAndFeel(args[0]);
+            return;
+        }catch(Exception ex){
+            // ex.printStackTrace();
+            System.out.println("Available themes:");
+            for (UIManager.LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels())System.out.println(lafi.getClassName());
+            return;
+        }
+    }
     public static void main(String[] args) {
-        boolean isConsoleMode = args.length==1?(args[0].equals("-console")?true:false):false;
+        // boolean isConsoleMode = args.length==1?(args[0].equals("-console")?true:false):false;
+        boolean isConsoleMode = false;
         if(!isConsoleMode) {
+            setTheme(args);
             Mode mode = new Mode();
             JFrame frame = new JFrame("Chmod calculator");
-            JMenuBar jmb = new JMenuBar();
+            /*JMenuBar jmb = new JMenuBar();
             JMenu jm = new JMenu("Themes");
             List<JMenuItem> ljmi = new ArrayList<>();
             for (UIManager.LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {
@@ -23,6 +36,9 @@ public class MalcGUI {
                 jmi.addActionListener((ev) -> {
                     try{
                         UIManager.setLookAndFeel(lafi.getClassName());
+                        frame.setVisible(false);
+                        frame.dispose();
+                        frame.setVisible(true);
                     }catch(Exception ex){
                         ex.printStackTrace();
                     }
@@ -30,7 +46,7 @@ public class MalcGUI {
                 jm.add(jmi);
             }
             jmb.add(jm);
-            frame.setJMenuBar(jmb);
+            frame.setJMenuBar(jmb);*/
             /*
             **
             ** O = Owner permissions
