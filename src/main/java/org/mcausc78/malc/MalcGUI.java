@@ -25,10 +25,13 @@ public class MalcGUI {
         // boolean isConsoleMode = args.length==1?(args[0].equals("-console")?true:false):false;
         boolean isConsoleMode = false;
         if(!isConsoleMode) {
-            setTheme(args);
+            //setTheme(args);
             Mode mode = new Mode();
-            JFrame frame = new JFrame("Chmod calculator");
-            /*JMenuBar jmb = new JMenuBar();
+            var ref = new Object() {
+                JFrame frame = new JFrame("Chmod calculator");
+            };
+            JFrame frame = ref.frame;
+            JMenuBar jmb = new JMenuBar();
             JMenu jm = new JMenu("Themes");
             List<JMenuItem> ljmi = new ArrayList<>();
             for (UIManager.LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {
@@ -36,9 +39,10 @@ public class MalcGUI {
                 jmi.addActionListener((ev) -> {
                     try{
                         UIManager.setLookAndFeel(lafi.getClassName());
-                        frame.setVisible(false);
                         frame.dispose();
-                        frame.setVisible(true);
+                        ref.frame = new JFrame("Chmod calculator");
+                        main(new String[]{});
+                        return;
                     }catch(Exception ex){
                         ex.printStackTrace();
                     }
@@ -46,7 +50,7 @@ public class MalcGUI {
                 jm.add(jmi);
             }
             jmb.add(jm);
-            frame.setJMenuBar(jmb);*/
+            frame.setJMenuBar(jmb);
             /*
             **
             ** O = Owner permissions
@@ -154,7 +158,7 @@ public class MalcGUI {
 
                 @Override
                 public void windowClosing(WindowEvent e) {
-                    int a = JOptionPane.showConfirmDialog(frame, "Wanna exit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    int a = JOptionPane.showConfirmDialog(ref.frame, "Wanna exit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     switch (a) {
                         case JOptionPane.YES_OPTION:
                             frame.setVisible(false);
