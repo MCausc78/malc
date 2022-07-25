@@ -3,9 +3,10 @@ package org.mcausc78.malc;
 import org.mcausc78.malc.permissions.Mode;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.List;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MalcGUI {
@@ -14,6 +15,22 @@ public class MalcGUI {
         if(!isConsoleMode) {
             Mode mode = new Mode();
             JFrame frame = new JFrame("Chmod calculator");
+            JMenuBar jmb = new JMenuBar();
+            JMenu jm = new JMenu("Themes");
+            List<JMenuItem> ljmi = new ArrayList<>();
+            for (UIManager.LookAndFeelInfo lafi : UIManager.getInstalledLookAndFeels()) {
+                JMenuItem jmi = new JMenuItem(lafi.getClassName());
+                jmi.addActionListener((ev) -> {
+                    try{
+                        UIManager.setLookAndFeel(lafi.getClassName());
+                    }catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+                });
+                jm.add(jmi);
+            }
+            jmb.add(jm);
+            frame.setJMenuBar(jmb);
             /*
             **
             ** O = Owner permissions
